@@ -1,0 +1,22 @@
+.InfoBar {
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4px;
+}
+
+.InfoBar svg {
+    height: 100px;
+    padding: 10px;
+}
+
+.InfoBar h2 {
+    font-weight: bold;
+    font-size: 10pt;
+    color: white;
+}
