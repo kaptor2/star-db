@@ -1,0 +1,30 @@
+export class SwapiService {
+    _apiBase = "https://swapi.dev/api/";
+  
+    async getResource(url) {
+      const fetchURL = `${this._apiBase}${url}`;
+      const res = await fetch(fetchURL);
+      if (!res.ok) {
+        throw new Error(`Cold not fetch ${fetchURL}
+          received ${res.status}`);
+      }
+      const body = await res.json();
+      return body;
+    }
+  
+    async getAllPeoples() {
+      const res = await this.getResource(`people/`);
+      return res;
+    }
+  
+    async getPeople(id) {
+      const res = await this.getResource(`people/${id}`);
+      return res;
+    }
+  
+    async getAllPlanets() {
+      const res = await this.getResource(`planets/`);
+      return res;
+    }
+  
+  }
