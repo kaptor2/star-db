@@ -1,0 +1,29 @@
+.Items_img{
+    width: 49px;
+    height: 49px;
+    border-radius: 50%;
+    font-size: 40px;
+    background-color: #DADBD5;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Items {
+    display: flex;
+    align-items: center;
+    padding: 0.7rem;
+    border-bottom: 1px solid #E0E0E0;
+    cursor: pointer;
+}
+
+.Items:hover{
+    background-color: #F6F6F6;
+}
+
+.Items span{
+    padding-left: 0.5rem;
+    font-size: 10pt;
+    font-weight: bold;
+}

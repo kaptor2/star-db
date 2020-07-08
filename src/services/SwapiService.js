@@ -12,18 +12,8 @@ export class SwapiService {
     return body;
   }
 
-  async getAllPeoples() {
-    const res = await this.getResource(`people/`);
-    return res;
-  }
-
-  async getPeople(id) {
-    const res = await this.getResource(`people/${id}`);
-    return res;
-  }
-
-  async getAllPlanets() {
-    const res = await this.getResource(`planets/`);
-    return res;
+  _extractID (item) {
+    const regMasck = /\/([0-9]*)\/$/;
+    return item.url.match(regMasck)[1];
   }
 }

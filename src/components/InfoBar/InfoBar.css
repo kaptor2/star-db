@@ -8,15 +8,15 @@
     justify-content: center;
     align-items: center;
     padding: 4px;
+    color: white;
 }
 
-.InfoBar svg {
-    height: 100px;
-    padding: 10px;
+.InfoBar h1 {
+    font-size: 14pt;
+    font-weight: bold;
 }
 
 .InfoBar h2 {
-    font-weight: bold;
     font-size: 10pt;
-    color: white;
+    text-align: center;
 }
