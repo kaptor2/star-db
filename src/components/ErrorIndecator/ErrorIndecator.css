@@ -1,0 +1,11 @@
+.ErrorIndecator {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.ErrorIndecator span{
+  color: rgb(197, 82, 116);
+  font-weight: bold;
+}

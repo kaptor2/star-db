@@ -8,7 +8,7 @@
     }
 
     .App-content {
-        grid-template-columns: 25rem 1fr !important;
+        grid-template-columns: 18rem 1fr !important;
         grid-template-rows: 10rem 1fr !important;
     }
 }
