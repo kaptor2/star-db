@@ -9,32 +9,35 @@ export class RandomPlanet extends Component {
   service = new SwapiPlanet();
   state = {
     planet: {},
-    loading: true,
-    error: false,
+    status: "loading", // error, show, unshow, loading
   };
 
   componentDidMount() {
     this.updatePlanet();
-    this.interval = setInterval(this.updatePlanet,2500);
+    this.interval = setInterval(this.updatePlanet, 2500);
   }
 
   onPlanetLoaded = (planet) => {
-    this.setState({ planet, loading: false });
+    this.setState({ planet, status: "show" });
   };
 
   onError = (err) => {
-    this.setState({ error: err });
+    this.setState({ status: "error" });
   };
 
   updatePlanet = () => {
     const id = Math.floor(Math.random() * 25 + 3);
     this.service.getPlanet(id).then(this.onPlanetLoaded).catch(this.onError);
-  }
+  };
 
   render() {
-    const { loading, error, planet } = this.state;
-    if (error) return <ErrorIndecator code={error} />;
-    if (loading) return <Spinner />;
-    return <RandomPlanetContent planet={planet} />;
+    const { status, planet } = this.state;
+
+    switch (status) {
+      case "loading" : return  <Spinner />;
+      case "error" : return  <ErrorIndecator />;
+      case "show" : return  <RandomPlanetContent planet={planet} />;
+      default: return <ErrorIndecator />;
+    }
   }
 }

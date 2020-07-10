@@ -1,25 +1,32 @@
-import React from 'react';
-import './App.css';
-import { AppHeader } from '../Header/AppHeader';
-import { RandomPlanet } from '../RandomPlanet/RandomPlanet';
-import { PersonDetails } from '../PersonDetails/PersonDetails';
-import { ItemList } from '../ItemList/ItemList';
+import React from "react";
+import "./App.css";
+import { AppHeader } from "../Header/AppHeader";
+import { RandomPlanet } from "../RandomPlanet/RandomPlanet";
+import { PersonDetails } from "../PersonDetails/PersonDetails";
+import { ItemList } from "../ItemList/ItemList";
 import back from "../../media/background-info.png";
 
-export const App = () => {
+export class App extends React.Component {
+  state = { id: null };
 
-  const style = {
-    background : `url(${back})`
-  }
+  style = {
+    background: `url(${back})`,
+  };
 
-  return (
-    <div className="App">
-      <div className="App-content" style={ style }>
-        <AppHeader />
-        <RandomPlanet />
-        <ItemList />
-        <PersonDetails />
+  onItemSelected = (id) => {
+    this.setState({ id });
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <div className="App-content" style={this.style}>
+          <AppHeader />
+          <RandomPlanet />
+          <ItemList id ={this.state.id} onItemSelected={this.onItemSelected} />
+          <PersonDetails id ={this.state.id}/>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }

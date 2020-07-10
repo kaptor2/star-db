@@ -15,7 +15,7 @@ export class SwapiPlanet extends SwapiService {
     return this._transforPlanet(planet);
   }
 
-  _transforPlanet(planet) {
+  _transforPlanet = (planet) => {
     return {
       id: this._extractID(planet),
       name: planet.name,

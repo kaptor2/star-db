@@ -18,7 +18,11 @@
     cursor: pointer;
 }
 
-.Items:hover{
+.Items_h:hover{
+    background-color: #F6F6F6;
+}
+
+.Items_active{
     background-color: #F6F6F6;
 }
 

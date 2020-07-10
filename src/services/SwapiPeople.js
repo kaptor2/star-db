@@ -6,12 +6,22 @@ export class SwapiPeople extends SwapiService {
   }
 
   async getAllPeoples() {
-    const res = await this.getResource(`people/`);
-    return res;
+    const people = await this.getResource(`people/`);
+    return people.results.map(this._transforPeople);
   }
 
   async getPeople(id) {
-    const res = await this.getResource(`people/${id}`);
-    return res;
+    const people = await this.getResource(`people/${id}`);
+    return this._transforPeople(people);
+  }
+
+  _transforPeople = (people) => {
+    return {
+      id: this._extractID(people),
+      name: people.name,
+      birth_year: people.birth_year,
+      gender: people.gender,
+      height: people.height
+    };
   }
 }
