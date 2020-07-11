@@ -5,10 +5,10 @@ export class SwapiPlanet extends SwapiService {
     super();
   }
 
-  async getAllPlanets() {
+  getAllPlanets = async () => {
     const planets = await this.getResource(`planets/`);
     return planets.results.map(this._transforPlanet);
-  }
+  };
 
   async getPlanet(id) {
     const planet = await this.getResource(`planets/${id}`);
@@ -23,6 +23,7 @@ export class SwapiPlanet extends SwapiService {
       population: planet.population,
       orbital_period: planet.orbital_period,
       gravity: planet.gravity,
+      url: `https://starwars-visualguide.com/assets/img/planets/${ this._extractID(planet) }.jpg`,
     };
-  }
+  };
 }

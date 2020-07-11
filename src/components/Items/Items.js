@@ -7,6 +7,7 @@ export class Items extends React.Component {
   };
 
   element = (src) => {
+    console.log(src);
     return src ? (
       <img className="Items_img" src={`${src}`} />
     ) : (
@@ -24,7 +25,7 @@ export class Items extends React.Component {
           return click(ids);
         }}
       >
-        {this.element(src)}
+        { this.element(src) }
         <span>{name}</span>
       </li>
     );

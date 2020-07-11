@@ -21,7 +21,8 @@ export class SwapiPeople extends SwapiService {
       name: people.name,
       birth_year: people.birth_year,
       gender: people.gender,
-      height: people.height
+      height: people.height,
+      picture: `https://starwars-visualguide.com/assets/img/characters/${ this._extractID(people) }.jpg`
     };
   }
 }

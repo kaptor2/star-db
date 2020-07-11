@@ -1,30 +1,31 @@
 import React, { Component } from "react";
 import "./ItemList.css";
 import { Items } from "../Items/Items.js";
-import { SwapiPeople } from "../../services/SwapiPeople";
 import { Spinner } from "../Spinner/Spinner.js";
 
 export class ItemList extends Component {
-  service = new SwapiPeople();
 
   state = {
-    peopleList: null,
+    item: null,
   };
 
   componentDidMount() {
-    this.service.getAllPeoples().then((peopleList) => {
-      this.setState({ peopleList });
+
+    const { getData } = this.props;
+
+    getData().then(( item ) => {
+      this.setState({ item });
     });
   }
 
-  renderItems(peoples) {
-    return peoples.map(({ id, name }) => {
+  renderItems(item) {
+    return item.map(({ id, name, url }) => {
       return (
         <Items
           key={id}
           ids={id}
           name={name}
-          src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}
+          src={ url }
           click={this.props.onItemSelected}
           active={this.props.id == id}
         />
@@ -33,13 +34,13 @@ export class ItemList extends Component {
   }
 
   render() {
-    const { peopleList } = this.state;
-
-    if (!peopleList) {
+    const { item } = this.state;
+    console.log(item)
+    if (!item) {
       return <Spinner />;
     }
 
-    const items = this.renderItems(peopleList);
-    return <ul className="ItemList">{items}</ul>;
+    const Myitem = this.renderItems(item);
+    return <ul className="ItemList">{Myitem}</ul>;
   }
 }
