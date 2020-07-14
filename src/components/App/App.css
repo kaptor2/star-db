@@ -5,6 +5,7 @@
         padding: 1rem 5%;
         height: calc(100% - 38px);
         justify-content: center;
+
     }
 
     .App-content {
@@ -16,9 +17,10 @@
 @keyframes startAnim {
     0% {
         transform: scale(1.4);
-        opacity:0
+        opacity:0;
     } to {
-        transform: scale(1);opacity:1
+        transform: scale(1);
+        opacity:1;
     }
 }
 

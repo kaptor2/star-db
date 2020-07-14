@@ -10,7 +10,7 @@ export class SwapiPlanet extends SwapiService {
     return planets.results.map(this._transforPlanet);
   };
 
-  async getPlanet(id) {
+  getPlanet  = async (id) => {
     const planet = await this.getResource(`planets/${id}`);
     return this._transforPlanet(planet);
   }

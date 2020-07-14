@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import "./PersonDetails.css";
-import { SwapiPeople } from "../../services/SwapiPeople";
 import { Spinner } from "../Spinner/Spinner";
 
 export class PersonDetails extends Component {
-  service = new SwapiPeople();
+
 
   state = {
     id: null,
@@ -13,23 +12,23 @@ export class PersonDetails extends Component {
   };
 
   componentDidMount() {
-    this.updatePeople();
+    this.updateItem();
   }
 
   componentDidUpdate(prevProps){
     if (prevProps.id != this.props.id) {
-      this.updatePeople();
+      this.updateItem();
     }
   }
 
-  updatePeople() {
-    let { id } = this.props;
+  updateItem() {
+    let { id, getData } = this.props;
     this.setState({status:"loading"})
     if (!id) {
       id = 1;
     }
 
-    this.service.getPeople(id).then((people) => {
+    getData(id).then((people) => {
       this.setState({ id, people, status:"show" });
     });
   }
@@ -39,13 +38,13 @@ export class PersonDetails extends Component {
       return <Spinner />;
     }
 
-    const { id, name, birth_year, gender, height } = this.state.people;
+    const { id, name, birth_year, gender, height, url } = this.state.people;
 
     return (
       <div className="PersonDetails">
         <div>
           <img
-            src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}
+            src={ url }
           ></img>
         </div>
         <h3>{`${name}`}</h3>

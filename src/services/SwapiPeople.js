@@ -5,12 +5,12 @@ export class SwapiPeople extends SwapiService {
     super();
   }
 
-  async getAllPeoples() {
+  getAllPeoples = async () => {
     const people = await this.getResource(`people/`);
     return people.results.map(this._transforPeople);
   }
 
-  async getPeople(id) {
+   getPeople = async (id) => {
     const people = await this.getResource(`people/${id}`);
     return this._transforPeople(people);
   }
@@ -22,7 +22,7 @@ export class SwapiPeople extends SwapiService {
       birth_year: people.birth_year,
       gender: people.gender,
       height: people.height,
-      picture: `https://starwars-visualguide.com/assets/img/characters/${ this._extractID(people) }.jpg`
+      url: `https://starwars-visualguide.com/assets/img/characters/${ this._extractID(people) }.jpg`
     };
   }
 }

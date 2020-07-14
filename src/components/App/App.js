@@ -5,12 +5,14 @@ import { RandomPlanet } from "../RandomPlanet/RandomPlanet";
 import { PersonDetails } from "../PersonDetails/PersonDetails";
 import { ItemList } from "../ItemList/ItemList";
 import back from "../../media/background-info.png";
-import { SwapiPlanet } from "../../services/SwapiPlanet.js"
-import { SwapiPeople } from "../../services/SwapiPeople.js"
+import { SwapiPlanet } from "../../services/SwapiPlanet.js";
+import { SwapiPeople } from "../../services/SwapiPeople.js";
+import { Items } from "../Items/Items.js";
+import { Error } from "../../Error.js";
 
 export class App extends React.Component {
-
-  service = new SwapiPlanet();
+  swapiPeople = new SwapiPeople();
+  swapiPlanet = new SwapiPlanet();
 
   state = { id: null };
 
@@ -22,16 +24,48 @@ export class App extends React.Component {
     this.setState({ id });
   };
 
+  renderItems = (item) => {
+    return item.map(({ id, name, url }) => {
+      return (
+        <Items
+          key={id}
+          ids={id}
+          name={name}
+          src={url}
+          click={this.onItemSelected}
+        />
+      );
+    });
+  };
+
   render() {
+    const itemList = (
+      <ItemList id={this.state.id} getData={this.swapiPeople.getAllPeoples}>
+        {this.renderItems}
+      </ItemList>
+    );
+
+    const details = <PersonDetails id={this.state.id} getData={ this.swapiPlanet.getPlanet}/>;
+
     return (
       <div className="App">
-        <div className="App-content" style={this.style}>
-          <AppHeader />
-          <RandomPlanet />
-          <ItemList id ={this.state.id} getData={ this.service.getAllPlanets } onItemSelected={this.onItemSelected} />
-          <PersonDetails id ={this.state.id}/>
-        </div>
+        <Error>
+          <div className="App-content" style={this.style}>
+            <AppHeader />
+            <RandomPlanet />
+            <Row list={itemList} detail={details} />
+          </div>
+        </Error>
       </div>
     );
   }
 }
+
+const Row = ({ list, detail }) => {
+  return (
+    <>
+      {list}
+      {detail}
+    </>
+  );
+};
