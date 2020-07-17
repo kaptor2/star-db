@@ -1,13 +1,12 @@
 import React, { Component } from "react";
-import "./PersonDetails.css";
+import "./Details.css";
 import { Spinner } from "../Spinner/Spinner";
 
-export class PersonDetails extends Component {
-
+export class Details extends Component {
 
   state = {
     id: null,
-    people: null,
+    item: null,
     status: "loading", // loading, show
   };
 
@@ -28,17 +27,18 @@ export class PersonDetails extends Component {
       id = 1;
     }
 
-    getData(id).then((people) => {
-      this.setState({ id, people, status:"show" });
+    getData(id).then((item) => {
+      this.setState({ id, item, status:"show" });
     });
   }
 
   render() {
-    if (!this.state.people || this.state.status == "loading") {
+    if (!this.state.item || this.state.status == "loading") {
       return <Spinner />;
     }
 
-    const { id, name, birth_year, gender, height, url } = this.state.people;
+    const { name, url } = this.state.item;
+    const item = this.state.item;
 
     return (
       <div className="PersonDetails">
@@ -49,18 +49,11 @@ export class PersonDetails extends Component {
         </div>
         <h3>{`${name}`}</h3>
         <ul>
-          <li>
-            <b>Birth: </b>
-            {birth_year}
-          </li>
-          <li>
-            <b>Gender: </b>
-            {gender}
-          </li>
-          <li>
-            <b>Height: </b>
-            {height}
-          </li>
+          {
+            React.Children.map(this.props.children, (child) =>{
+              return React.cloneElement(child, { item });
+            })
+          }
         </ul>
       </div>
     );
